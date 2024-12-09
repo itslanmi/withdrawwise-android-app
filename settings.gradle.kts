@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "WithdrawWise"
 include(":app")
- 
+include(":data")

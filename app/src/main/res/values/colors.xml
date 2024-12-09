@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gunmetal">#2D3142</color>
+    <color name="silver">#BFC0C0</color>
+    <color name="coral">#EF8354</color>
+    <color name="payne">#4F5D75</color>
 </resources>
