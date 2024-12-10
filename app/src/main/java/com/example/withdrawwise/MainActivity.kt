@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnProfile.setOnClickListener() {
-            val intent = Intent(this, MapsActivity::class.java)
+            val intent = Intent(this, ChartActivity::class.java)
             startActivity(intent)
         }
     }
