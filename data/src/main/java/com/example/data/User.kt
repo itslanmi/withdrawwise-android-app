@@ -1,8 +1,10 @@
 package com.example.data
 
 import java.time.LocalDateTime
+import java.util.UUID
 
 data class User(
+    val userID: UUID,             // User's ID
     val name: String,             // User's name
     val bank: Bank,               // User's bank
     val withdrawals: MutableList<Withdrawal> = mutableListOf() // List of previous withdrawals
