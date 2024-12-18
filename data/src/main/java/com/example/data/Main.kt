@@ -4,7 +4,7 @@ import java.util.UUID
 
 fun main() {
     val bank = Bank("Bank of America")
-    val atm = ATM("ATM 1", "Downtown", bank, 1.0)
+    val atm = ATM("ATM 1", 15.1,12.2, bank, 1.0)
     val user = User(UUID.randomUUID(),"Alice", bank)
 
 

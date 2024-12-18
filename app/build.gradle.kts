@@ -41,6 +41,8 @@ android {
 
 dependencies {
 
+    implementation ("com.google.code.gson:gson:2.11.0")
+    implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation(project(":data"))
     implementation("com.patrykandpatrick.vico:views:2.0.0-beta.3")
     implementation(libs.androidx.core.ktx)

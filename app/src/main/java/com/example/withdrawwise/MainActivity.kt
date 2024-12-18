@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnProfile.setOnClickListener() {
-            val intent = Intent(this, ChartActivity::class.java)
+        binding.btnTest.setOnClickListener() {
+            val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
     }
