@@ -64,6 +64,9 @@ class ChartActivity : AppCompatActivity() {
                 this.modelProducer = modelProducer
             }
         }
+
+        val myApplication = application as MyApplication
+
         enableEdgeToEdge()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
@@ -76,7 +79,19 @@ class ChartActivity : AppCompatActivity() {
         lifecycleScope.launch {
             modelProducer.runTransaction { columnSeries { series(List(22) { (2 + Random.nextFloat() * 6).roundToInt().toFloat() }) }}
         }
+
+        fun getLocalWithdrawalCount() = myApplication.getUser().withdrawals.filter { it.atm.bank.name == myApplication.getUser().bank.name }.size
+
+        binding.textName.text = myApplication.getUser().name
+        binding.textBank.text = myApplication.getUser().bank.name
+
+        binding.textData1.text = getString(R.string.total_amount_data,myApplication.getUser().withdrawals.sumOf { it.amount }.toString())
+        binding.textData2.text = getString(R.string.lost_in_fees_data, myApplication.getUser().withdrawals.sumOf { it.amount*(it.fee/100) }.toString())
+        binding.textData3.text = getString(R.string.local_withdrawals_data, getLocalWithdrawalCount().toString())
+        binding.textData4.text = getString ( R.string.foreign_withdrawals_data ,(myApplication.getUser().withdrawals.size - getLocalWithdrawalCount()).toString())
     }
+
+
 
     private fun getViewHorizontalLine() =
         HorizontalLine(
@@ -93,6 +108,11 @@ class ChartActivity : AppCompatActivity() {
                 background = ShapeComponent(Fill(HORIZONTAL_LINE_COLOR), CorneredShape.Pill),
             ),
         )
+
+
+
+
+
 
 
 

@@ -25,11 +25,11 @@
         android:id="@+id/textAtmName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ATM Name"
+        android:text="@string/atm_name"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textAtmBank"
         app:layout_constraintStart_toStartOf="@+id/textAtmBank"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline6"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="ATM Bank"
+        android:text="@string/atm_bank_local"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textAtmFee"
         app:layout_constraintStart_toStartOf="@+id/textAtmFee"
@@ -48,7 +48,7 @@
         android:id="@+id/textAtmFee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ATM Fee"
+        android:text="@string/atm_fee_local"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textLabelAmount"
         app:layout_constraintStart_toStartOf="@+id/textLabelAmount"
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Log Withdrawal"
+        android:text="@string/log_withdrawal_btn"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/editAmount" />
@@ -80,8 +80,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Enter amount below"
+        android:text="@string/enter_amount_label"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/editAmount"
         app:layout_constraintStart_toStartOf="@+id/editAmount" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/log_withdraw" />
 </androidx.constraintlayout.widget.ConstraintLayout>

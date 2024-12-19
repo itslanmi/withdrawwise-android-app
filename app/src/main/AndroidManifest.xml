@@ -22,9 +22,6 @@
         <activity
             android:name=".AddWithdrawalActivity"
             android:exported="false" />
-        <activity
-            android:name=".InfoActivity"
-            android:exported="false" />
         <!--
              Before you run your application, you need a Google Maps API key.
 

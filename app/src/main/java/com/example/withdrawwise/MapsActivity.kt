@@ -63,9 +63,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding.btnInfo.setOnClickListener() {
             if(isATMSelected) {
-                val intent = Intent(this, InfoActivity::class.java)
-                intent.putExtra("selectedATM", selectedATM.name)
-                startActivity(intent)
+                showNotification()
             }else{
                 Log.d("MapsActivity", "No ATM selected")
                 Toast.makeText(this, "Please select an ATM first", Toast.LENGTH_SHORT).show()
@@ -99,33 +97,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         // Create an intent to open ProfileActivity
-        val intent = Intent(this, ChartActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        val mapsIntent = Intent(this, MapsActivity::class.java)
+        val profileIntent = Intent(this, ChartActivity::class.java)
+        val pendingIntent = PendingIntent.getActivities(
+            this, 0, arrayOf(mapsIntent, profileIntent), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         // Build the notification
         val notification = NotificationCompat.Builder(this, "profile_channel")
             .setSmallIcon(R.drawable.dummy_profile_pic) // Replace with your notification icon
             .setContentTitle("Profile Notification")
-            .setContentText("Click to open ProfileActivity")
+            .setContentText("Time to check your Withdrawal statistics!")
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()
 
-        // Show the notification
         notificationManager.notify(1, notification)
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 

@@ -33,14 +33,14 @@ class AddWithdrawalActivity : AppCompatActivity() {
         val selectedName = intent.getStringExtra("selectedATM")
         val selectedATM = myApplication.getSelectedATM(selectedName)
 
-        binding.textAtmName.text = "ATM Full Name:\n" + selectedATM.name
+        binding.textAtmName.text = getString(R.string.atm_name, selectedATM.name)
         if(selectedATM.bank.name == myApplication.getUser().bank.name){
-            binding.textAtmBank.text = "Bank Name\n" + selectedATM.bank.name + " (Local)"
-            binding.textAtmFee.text = "Withdrawal Fee does not apply"
+            binding.textAtmBank.text = getString(R.string.atm_bank_local,selectedATM.bank.name)
+            binding.textAtmFee.text = getString(R.string.atm_fee_local)
         }
         else{
-            binding.textAtmBank.text = "Bank Name\n" + selectedATM.bank.name + " (Foreign)"
-            binding.textAtmFee.text = "Withdrawal Fee: " + selectedATM.withdrawalFee.toString() + "%"
+            binding.textAtmBank.text = getString(R.string.atm_bank_foreign,selectedATM.bank.name)
+            binding.textAtmFee.text = getString(R.string.atm_fee_foreign, selectedATM.withdrawalFee.toString(),"%")
         }
 
 

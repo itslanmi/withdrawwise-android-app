@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".ChartActivity">
 
+    <TextView
+        android:id="@+id/textLabel3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/local_withdrawals_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textLabel2" />
+
     <com.patrykandpatrick.vico.views.cartesian.CartesianChartView
         android:id="@+id/chart_view"
         android:layout_width="match_parent"
@@ -42,14 +52,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.40492475" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <TextView
         android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Milan Momcilovic"
+        android:text="@string/user_name"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,8 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="Withdrawals by months:"
-        android:textSize="14sp"
+        android:text="@string/chart_label"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
@@ -70,9 +80,89 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="&quot;Bank of America&quot;"
+        android:text="@string/user_bank"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textName" />
+
+    <TextView
+        android:id="@+id/textStatistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/statistics_label"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chart_view" />
+
+    <TextView
+        android:id="@+id/textLabel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/total_amount_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textStatistics" />
+
+    <TextView
+        android:id="@+id/textLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/lost_in_fees_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textLabel1" />
+
+    <TextView
+        android:id="@+id/textLabel4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/foreign_withdrawals_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textLabel3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <TextView
+        android:id="@+id/textData1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_amount_data"
+        app:layout_constraintBottom_toBottomOf="@+id/textLabel1"
+        app:layout_constraintStart_toStartOf="@+id/guideline5" />
+
+    <TextView
+        android:id="@+id/textData2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lost_in_fees_data"
+        app:layout_constraintBottom_toBottomOf="@+id/textLabel2"
+        app:layout_constraintStart_toStartOf="@+id/guideline5" />
+
+    <TextView
+        android:id="@+id/textData3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/local_withdrawals_data"
+        app:layout_constraintBottom_toBottomOf="@+id/textLabel3"
+        app:layout_constraintStart_toStartOf="@+id/guideline5" />
+
+    <TextView
+        android:id="@+id/textData4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_amount_data"
+        app:layout_constraintBottom_toBottomOf="@+id/textLabel4"
+        app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
