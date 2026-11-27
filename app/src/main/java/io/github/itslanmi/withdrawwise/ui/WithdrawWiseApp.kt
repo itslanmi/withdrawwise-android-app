@@ -16,7 +16,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -44,7 +46,20 @@ import io.github.itslanmi.withdrawwise.ui.navigation.TopLevelDestination
 private val NavBarBottomGap = 12.dp
 
 @Composable
-fun WithdrawWiseApp(modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
+fun WithdrawWiseApp(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+    requestedTab: TopLevelDestination? = null,
+    onRequestedTabShow: () -> Unit = {}
+) {
+    val currentOnRequestedTabShow by rememberUpdatedState(onRequestedTabShow)
+    LaunchedEffect(requestedTab) {
+        if (requestedTab != null) {
+            navController.navigateToTopLevel(requestedTab)
+            currentOnRequestedTabShow()
+        }
+    }
+
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
     val selected =

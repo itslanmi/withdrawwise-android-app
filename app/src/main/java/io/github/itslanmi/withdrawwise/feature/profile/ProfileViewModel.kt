@@ -8,6 +8,7 @@ import io.github.itslanmi.withdrawwise.domain.model.UserPreferences
 import io.github.itslanmi.withdrawwise.domain.repository.DirectoryRepository
 import io.github.itslanmi.withdrawwise.domain.repository.PreferencesRepository
 import io.github.itslanmi.withdrawwise.domain.repository.WithdrawalRepository
+import io.github.itslanmi.withdrawwise.notification.SummaryRunner
 import io.github.itslanmi.withdrawwise.ui.components.BankOption
 import io.github.itslanmi.withdrawwise.ui.components.buildBankOptions
 import javax.inject.Inject
@@ -32,7 +33,8 @@ class ProfileViewModel
 constructor(
     directory: DirectoryRepository,
     private val preferences: PreferencesRepository,
-    private val withdrawals: WithdrawalRepository
+    private val withdrawals: WithdrawalRepository,
+    private val summaries: SummaryRunner
 ) : ViewModel() {
     private val bankOptions = flow { emit(buildBankOptions(directory.banks(), directory.atms())) }
 
@@ -50,6 +52,8 @@ constructor(
     fun setWeeklySummary(enabled: Boolean) = launch { preferences.setWeeklySummary(enabled) }
 
     fun setMonthlySummary(enabled: Boolean) = launch { preferences.setMonthlySummary(enabled) }
+
+    fun previewNotification() = launch { summaries.preview() }
 
     /** Deletes every logged withdrawal and the profile, which sends the user back to onboarding. */
     fun resetApp() = launch {

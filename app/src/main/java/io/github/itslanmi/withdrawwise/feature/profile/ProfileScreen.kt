@@ -1,5 +1,9 @@
 package io.github.itslanmi.withdrawwise.feature.profile
 
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -59,6 +63,8 @@ import io.github.itslanmi.withdrawwise.ui.components.SettingRow
 import io.github.itslanmi.withdrawwise.ui.components.SwitchSettingRow
 import io.github.itslanmi.withdrawwise.ui.components.WwCard
 import io.github.itslanmi.withdrawwise.ui.components.WwTextField
+import io.github.itslanmi.withdrawwise.ui.components.hasNotificationPermission
+import io.github.itslanmi.withdrawwise.ui.components.rememberPermissionState
 
 @Composable
 fun ProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewModel = hiltViewModel()) {
@@ -71,6 +77,7 @@ fun ProfileScreen(modifier: Modifier = Modifier, viewModel: ProfileViewModel = h
         onWeeklyChange = viewModel::setWeeklySummary,
         onMonthlyChange = viewModel::setMonthlySummary,
         onReset = viewModel::resetApp,
+        onPreviewNotification = viewModel::previewNotification,
         modifier = modifier
     )
 }
@@ -85,12 +92,15 @@ private fun ProfileContent(
     onWeeklyChange: (Boolean) -> Unit,
     onMonthlyChange: (Boolean) -> Unit,
     onReset: () -> Unit,
+    onPreviewNotification: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var showBankPicker by rememberSaveable { mutableStateOf(false) }
     var showNameDialog by rememberSaveable { mutableStateOf(false) }
     var showResetDialog by rememberSaveable { mutableStateOf(false) }
     val prefs = state.preferences
+    val notificationsAllowed = rememberPermissionState { hasNotificationPermission() }
+    val notificationLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
     Column(
         modifier
@@ -169,6 +179,35 @@ private fun ProfileContent(
                     checked = prefs.monthlySummary,
                     onCheckedChange = onMonthlyChange
                 )
+                HorizontalDivider(
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                if (notificationsAllowed) {
+                    SettingRow(
+                        icon = R.drawable.ic_bolt,
+                        title = stringResource(R.string.profile_preview_notification),
+                        subtitle = stringResource(R.string.profile_preview_notification_body),
+                        onClick = onPreviewNotification
+                    )
+                } else {
+                    SettingRow(
+                        icon = R.drawable.ic_warning,
+                        title = stringResource(R.string.profile_notifications_blocked),
+                        subtitle = stringResource(R.string.profile_notifications_blocked_body),
+                        trailing = {
+                            PillButton(
+                                text = stringResource(R.string.permission_allow),
+                                onClick = {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                        notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                                    }
+                                },
+                                compact = true
+                            )
+                        }
+                    )
+                }
             }
 
             SectionLabel(stringResource(R.string.profile_section_about), Modifier.padding(top = 12.dp))
