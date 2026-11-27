@@ -3,6 +3,8 @@ package io.github.itslanmi.withdrawwise
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -41,6 +43,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) handleIntent(intent)
+        keepSplashUntilReady()
         setContent {
             val state by appViewModel.state.collectAsStateWithLifecycle()
             val ready = state as? AppUiState.Ready
@@ -83,6 +86,20 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    /** Holds the system splash screen until the profile is loaded, so the first frame is never blank. */
+    private fun keepSplashUntilReady() {
+        val content = findViewById<View>(android.R.id.content)
+        content.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    val ready = appViewModel.state.value is AppUiState.Ready
+                    if (ready) content.viewTreeObserver.removeOnPreDrawListener(this)
+                    return ready
+                }
+            }
+        )
     }
 
     override fun onNewIntent(intent: Intent) {

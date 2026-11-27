@@ -1,7 +1,10 @@
 package io.github.itslanmi.withdrawwise.feature.profile
 
 import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -41,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -157,6 +161,22 @@ private fun ProfileContent(
                     selectedIndex = prefs.themeMode.ordinal,
                     onSelect = { onThemeChange(ThemeMode.entries[it]) }
                 )
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                val context = LocalContext.current
+                WwCard(contentPadding = PaddingValues(vertical = 4.dp)) {
+                    SettingRow(
+                        icon = R.drawable.ic_language,
+                        title = stringResource(R.string.profile_language),
+                        subtitle = stringResource(R.string.profile_language_body),
+                        onClick = {
+                            val intent =
+                                Intent(Settings.ACTION_APP_LOCALE_SETTINGS)
+                                    .setData(Uri.fromParts("package", context.packageName, null))
+                            context.startActivity(intent)
+                        }
+                    )
+                }
             }
 
             SectionLabel(stringResource(R.string.profile_section_notifications), Modifier.padding(top = 12.dp))

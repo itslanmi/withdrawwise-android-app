@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WithdrawWise</string>
+    <string name="app_name" translatable="false">WithdrawWise</string>
 
     <!-- Navigation -->
     <string name="nav_map">Map</string>
@@ -73,7 +73,7 @@
     <string name="profile_demo_data">Demo data</string>
     <string name="profile_demo_data_body">ATM locations and fees are illustrative and do not reflect real bank price lists.</string>
     <string name="profile_licenses">Open-source licences</string>
-    <string name="profile_licenses_body">Poppins (SIL OFL 1.1) · Material Symbols (Apache 2.0)</string>
+    <string name="profile_licenses_body" translatable="false">Poppins (SIL OFL 1.1) · Material Symbols (Apache 2.0)</string>
     <string name="profile_reset">Reset app</string>
     <string name="profile_reset_title">Reset WithdrawWise?</string>
     <string name="profile_reset_body">This deletes every logged withdrawal and your profile. It cannot be undone.</string>
@@ -85,7 +85,7 @@
     <string name="map_filter_all">All</string>
     <string name="map_filter_free">Free for me</string>
     <string name="map_filter_low">Low fee</string>
-    <string name="map_filter_24h">24/7</string>
+    <string name="map_filter_24h" translatable="false">24/7</string>
     <string name="map_fees_this_month">Fees this month</string>
     <string name="map_nearest_free">Nearest free</string>
     <string name="map_my_location">My location</string>
@@ -183,4 +183,6 @@
     <string name="profile_preview_notification_body">Shows this month\'s summary right now.</string>
     <string name="profile_notifications_blocked">Notifications are blocked</string>
     <string name="profile_notifications_blocked_body">Allow them to receive your summaries.</string>
+    <string name="profile_language">Language</string>
+    <string name="profile_language_body">Show WithdrawWise in English or Slovenian.</string>
 </resources>

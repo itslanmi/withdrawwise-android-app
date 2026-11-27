@@ -1,0 +1,195 @@
+<resources>
+    <!-- Navigation -->
+    <string name="nav_map">Zemljevid</string>
+    <string name="nav_history">Zgodovina</string>
+    <string name="nav_insights">Pregled</string>
+    <string name="nav_profile">Profil</string>
+
+    <string name="placeholder_history_title">Še ni dvigov</string>
+    <string name="placeholder_history_message">Zabeleženi dvigi se bodo prikazali tukaj, razvrščeni po mesecih.</string>
+    <string name="placeholder_insights_title">Za pregled potrebujemo podatke</string>
+    <string name="placeholder_insights_message">Zabeležite nekaj dvigov in pokazali vam bomo, kam gre vaš denar.</string>
+
+    <!-- Common -->
+    <string name="action_back">Nazaj</string>
+    <string name="action_save">Shrani</string>
+    <string name="action_cancel">Prekliči</string>
+    <string name="action_close">Zapri</string>
+    <string name="action_clear">Počisti</string>
+    <string name="action_undo">Razveljavi</string>
+    <string name="fee_free">Brezplačno</string>
+    <plurals name="bank_free_atms">
+        <item quantity="one">Brezplačno na %d bankomatu v Ljubljani</item>
+        <item quantity="two">Brezplačno na %d bankomatih v Ljubljani</item>
+        <item quantity="few">Brezplačno na %d bankomatih v Ljubljani</item>
+        <item quantity="other">Brezplačno na %d bankomatih v Ljubljani</item>
+    </plurals>
+
+    <!-- Permissions -->
+    <string name="permission_allow">Dovoli</string>
+    <string name="permission_granted">Dovoljeno</string>
+    <string name="permission_location_title">Lokacija</string>
+    <string name="permission_location_body">Najdite najbližji brezplačni bankomat.</string>
+    <string name="permission_notifications_title">Obvestila</string>
+    <string name="permission_notifications_body">Tedenski in mesečni povzetki provizij.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Dvigujte pametno.\nObdržite provizije.</string>
+    <string name="onboarding_welcome_body">Poglejte, koliko vas z vašo kartico stane vsak bankomat v Ljubljani, najdite najbližjega brezplačnega in spremljajte, kam gre vaš denar.</string>
+    <string name="onboarding_get_started">Začnimo</string>
+    <string name="onboarding_continue">Naprej</string>
+    <string name="onboarding_finish">Začni varčevati</string>
+    <string name="onboarding_bank_title">Pri kateri banki imate kartico?</string>
+    <string name="onboarding_bank_body">Glede na to obarvamo vsak bankomat po tem, koliko vas stane.</string>
+    <string name="onboarding_finish_title">Skoraj končano</string>
+    <string name="onboarding_finish_body">Povejte nam, kako vas naj kličemo, in izberite, kaj lahko WithdrawWise uporablja.</string>
+    <string name="onboarding_name_hint">Vaše ime (neobvezno)</string>
+    <string name="onboarding_change_later">Vse to lahko kasneje spremenite v profilu.</string>
+
+    <!-- Profile -->
+    <string name="profile_greeting">Živijo, %1$s</string>
+    <string name="profile_greeting_anonymous">Živijo</string>
+    <plurals name="profile_withdrawal_count">
+        <item quantity="one">%d zabeležen dvig</item>
+        <item quantity="two">%d zabeležena dviga</item>
+        <item quantity="few">%d zabeleženi dvigi</item>
+        <item quantity="other">%d zabeleženih dvigov</item>
+    </plurals>
+    <string name="profile_section_card">Vaša kartica</string>
+    <string name="profile_pick_bank">Izberite banko</string>
+    <string name="profile_name">Ime</string>
+    <string name="profile_name_empty">Ni nastavljeno</string>
+    <string name="profile_section_appearance">Videz</string>
+    <string name="profile_theme">Tema</string>
+    <string name="theme_system">Sistemska</string>
+    <string name="theme_light">Svetla</string>
+    <string name="theme_dark">Temna</string>
+    <string name="profile_section_notifications">Obvestila</string>
+    <string name="profile_weekly_summary">Tedenski povzetek</string>
+    <string name="profile_weekly_summary_body">Vsak ponedeljek: koliko ste dvignili in plačali za provizije.</string>
+    <string name="profile_monthly_summary">Mesečno poročilo</string>
+    <string name="profile_monthly_summary_body">Vsakega 1.: pretekli mesec na prvi pogled.</string>
+    <string name="profile_section_about">O aplikaciji</string>
+    <string name="profile_version">Različica %1$s</string>
+    <string name="profile_demo_data">Demo podatki</string>
+    <string name="profile_demo_data_body">Lokacije bankomatov in provizije so ponazoritvene in ne odražajo dejanskih cenikov bank.</string>
+    <string name="profile_licenses">Odprtokodne licence</string>
+    <string name="profile_reset">Ponastavi aplikacijo</string>
+    <string name="profile_reset_title">Ponastavim WithdrawWise?</string>
+    <string name="profile_reset_body">S tem izbrišete vse zabeležene dvige in svoj profil. Tega ni mogoče razveljaviti.</string>
+    <string name="profile_reset_confirm">Izbriši vse</string>
+
+    <!-- Map -->
+    <string name="map_search_hint">Iščite bankomate, banke, soseske</string>
+    <string name="map_search_empty">Noben bankomat ne ustreza iskanju.</string>
+    <string name="map_filter_all">Vsi</string>
+    <string name="map_filter_free">Brezplačni zame</string>
+    <string name="map_filter_low">Nizka provizija</string>
+    <string name="map_fees_this_month">Provizije ta mesec</string>
+    <string name="map_nearest_free">Najbližji brezplačni</string>
+    <string name="map_my_location">Moja lokacija</string>
+    <string name="map_key_missing_title">Zemljevid ni na voljo</string>
+    <string name="map_key_missing_body">Ta različica nima ključa za Google Maps. Dodajte MAPS_API_KEY v local.properties. Iskanje, filtri in podrobnosti bankomatov še vedno delujejo.</string>
+
+    <!-- ATM detail -->
+    <string name="atm_fee_label">Provizija za dvig %1$s</string>
+    <string name="atm_fee_no_bank">V profilu izberite banko, da vidite svojo provizijo.</string>
+    <string name="atm_fee_own_bank">Bankomat vaše banke %1$s, brez provizije.</string>
+    <string name="atm_fee_partner">Partnerska mreža, brez provizije s kartico %1$s.</string>
+    <string name="atm_fee_other_bank">Zaračuna %1$s za uporabo bankomata druge banke.</string>
+    <string name="atm_fee_with_surcharge">Provizija %1$s in %2$s doplačila upravljavca.</string>
+    <string name="atm_open_24h">Odprto 24/7</string>
+    <string name="atm_limited_hours">Omejen delovni čas</string>
+    <string name="atm_contactless">Brezstično</string>
+    <string name="atm_tip_title">Prihranite %1$s</string>
+    <string name="atm_tip_body">%1$s je za vas brezplačen, oddaljen %2$s.</string>
+    <string name="atm_tip_show">Pokaži</string>
+    <string name="atm_navigate">Navigacija</string>
+    <string name="atm_log">Zabeleži dvig</string>
+
+    <!-- Log withdrawal -->
+    <string name="log_title">Zabeleži dvig</string>
+    <string name="log_edit_title">Uredi dvig</string>
+    <string name="log_amount_too_high">Največ %1$d € na dvig.</string>
+    <string name="log_fee">Provizija</string>
+    <string name="log_total">Skupaj z vašega računa</string>
+    <string name="log_confirm">Zabeleži %1$s</string>
+    <string name="log_delete">Izbriši dvig</string>
+    <string name="picker_title">Kje ste dvignili denar?</string>
+    <string name="picker_subtitle">Najcenejši bankomati za vašo kartico so na vrhu.</string>
+    <string name="map_logged">Zabeleženo %1$s · provizija %2$s</string>
+
+    <!-- History -->
+    <string name="history_deleted">Dvig izbrisan</string>
+    <string name="history_log_first">Zabeleži dvig</string>
+    <string name="history_find_atm">Poišči bankomat na zemljevidu</string>
+    <string name="history_load_sample">Naloži vzorčne podatke</string>
+    <string name="history_log">Dodaj</string>
+    <string name="history_this_month_withdrawn">Dvignjeno ta mesec</string>
+    <string name="history_this_month_fees">Provizije ta mesec</string>
+    <string name="history_month_summary">%1$s · %2$s provizij</string>
+    <string name="history_fee">−%1$s provizija</string>
+
+    <!-- Insights -->
+    <string name="period_week">Teden</string>
+    <string name="period_month">Mesec</string>
+    <string name="period_year">Leto</string>
+    <string name="period_this_week">v zadnjih 7 dneh</string>
+    <string name="period_this_month">ta mesec</string>
+    <string name="period_this_year">letos</string>
+    <string name="period_previous_week">prejšnji teden</string>
+    <string name="period_previous_month">prejšnji mesec</string>
+    <string name="period_previous_year">lani</string>
+    <string name="insights_fees_paid">Plačane provizije %1$s</string>
+    <string name="insights_less_than">%1$s manj kot %2$s</string>
+    <string name="insights_more_than">%1$s več kot %2$s</string>
+    <string name="insights_same_as">Enako kot %1$s</string>
+    <string name="insights_no_previous">Brez dvigov: %1$s</string>
+    <string name="insights_withdrawn">Dvignjeno</string>
+    <string name="insights_fees">Provizije</string>
+    <string name="insights_withdrawals">Dvigi</string>
+    <string name="insights_free_share">Brezplačni dvigi</string>
+    <string name="insights_average">Povprečje</string>
+    <string name="insights_trend">Gibanje</string>
+    <string name="insights_avoidable_title">Lahko bi prihranili %1$s</string>
+    <plurals name="insights_avoidable_body">
+        <item quantity="one">Pri %1$d dvigu je bil brezplačen bankomat manj kot %2$d m stran.</item>
+        <item quantity="two">Pri %1$d dvigih je bil brezplačen bankomat manj kot %2$d m stran.</item>
+        <item quantity="few">Pri %1$d dvigih je bil brezplačen bankomat manj kot %2$d m stran.</item>
+        <item quantity="other">Pri %1$d dvigih je bil brezplačen bankomat manj kot %2$d m stran.</item>
+    </plurals>
+    <string name="insights_all_free_title">Vsi dvigi so bili brezplačni</string>
+    <string name="insights_smart_title">Brez nepotrebnih provizij</string>
+    <string name="insights_smart_body">Ko ste plačali provizijo, v bližini ni bilo brezplačnega bankomata. Dobro načrtovano!</string>
+    <string name="insights_top_atms">Vaši najpogostejši bankomati</string>
+    <plurals name="insights_visits">
+        <item quantity="one">%d obisk</item>
+        <item quantity="two">%d obiska</item>
+        <item quantity="few">%d obiski</item>
+        <item quantity="other">%d obiskov</item>
+    </plurals>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Povzetki provizij</string>
+    <string name="notification_channel_description">Tedenski in mesečni povzetki vaših dvigov in provizij.</string>
+    <string name="notification_weekly_title">Vaš teden dvigov</string>
+    <string name="notification_monthly_title">Pregled meseca: %1$s</string>
+    <plurals name="notification_body">
+        <item quantity="one">Dvignili ste %1$s (%2$d dvig) in plačali %3$s provizij. Brezplačnih: %4$d %%.</item>
+        <item quantity="two">Dvignili ste %1$s (%2$d dviga) in plačali %3$s provizij. Brezplačnih: %4$d %%.</item>
+        <item quantity="few">Dvignili ste %1$s (%2$d dvigi) in plačali %3$s provizij. Brezplačnih: %4$d %%.</item>
+        <item quantity="other">Dvignili ste %1$s (%2$d dvigov) in plačali %3$s provizij. Brezplačnih: %4$d %%.</item>
+    </plurals>
+    <plurals name="notification_body_free">
+        <item quantity="one">Dvignili ste %1$s (%2$d dvig) brez ene same provizije. Odlično!</item>
+        <item quantity="two">Dvignili ste %1$s (%2$d dviga) brez ene same provizije. Odlično!</item>
+        <item quantity="few">Dvignili ste %1$s (%2$d dvigi) brez ene same provizije. Odlično!</item>
+        <item quantity="other">Dvignili ste %1$s (%2$d dvigov) brez ene same provizije. Odlično!</item>
+    </plurals>
+    <string name="profile_preview_notification">Pošlji predogled</string>
+    <string name="profile_preview_notification_body">Takoj pokaže povzetek tega meseca.</string>
+    <string name="profile_notifications_blocked">Obvestila so blokirana</string>
+    <string name="profile_notifications_blocked_body">Dovolite jih, da boste prejemali povzetke.</string>
+    <string name="profile_language">Jezik</string>
+    <string name="profile_language_body">Uporabljajte WithdrawWise v angleščini ali slovenščini.</string>
+</resources>
