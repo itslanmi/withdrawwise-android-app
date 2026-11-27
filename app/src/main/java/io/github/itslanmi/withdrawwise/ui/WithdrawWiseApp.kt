@@ -63,7 +63,9 @@ fun WithdrawWiseApp(modifier: Modifier = Modifier, navController: NavHostControl
                     composable<MapRoute> {
                         MapScreen(onOpenInsights = { navController.navigateToTopLevel(TopLevelDestination.Insights) })
                     }
-                    composable<HistoryRoute> { HistoryScreen() }
+                    composable<HistoryRoute> {
+                        HistoryScreen(onOpenMap = { navController.navigateToTopLevel(TopLevelDestination.Map) })
+                    }
                     composable<InsightsRoute> { InsightsScreen() }
                     composable<ProfileRoute> { ProfileScreen() }
                 }

@@ -44,7 +44,7 @@ fun AmountText(
                 withStyle(SpanStyle(fontSize = 0.5.em, baselineShift = BaselineShift(0.75f))) {
                     append(fraction.toString().padStart(2, '0'))
                 }
-                withStyle(SpanStyle(fontSize = 0.62.em)) { append(" €") }
+                withStyle(SpanStyle(fontSize = 0.62.em)) { append("\u2009€") }
             }
         }
     Text(text = text, modifier = modifier, style = style, color = color, maxLines = 1)

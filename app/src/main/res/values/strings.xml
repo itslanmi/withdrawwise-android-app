@@ -19,6 +19,7 @@
     <string name="action_cancel">Cancel</string>
     <string name="action_close">Close</string>
     <string name="action_clear">Clear</string>
+    <string name="action_undo">Undo</string>
     <string name="fee_free">Free</string>
     <plurals name="bank_free_atms">
         <item quantity="one">Free at %d ATM in Ljubljana</item>
@@ -106,4 +107,27 @@
     <string name="atm_tip_show">Show</string>
     <string name="atm_navigate">Navigate</string>
     <string name="atm_log">Log withdrawal</string>
+
+    <!-- Log withdrawal -->
+    <string name="log_title">Log withdrawal</string>
+    <string name="log_edit_title">Edit withdrawal</string>
+    <string name="log_amount_too_high">Maximum is %1$d € per withdrawal.</string>
+    <string name="log_fee">Fee</string>
+    <string name="log_total">Total from your account</string>
+    <string name="log_confirm">Log %1$s</string>
+    <string name="log_delete">Delete withdrawal</string>
+    <string name="picker_title">Where did you withdraw?</string>
+    <string name="picker_subtitle">Cheapest ATMs for your card come first.</string>
+    <string name="map_logged">Logged %1$s · fee %2$s</string>
+
+    <!-- History -->
+    <string name="history_deleted">Withdrawal deleted</string>
+    <string name="history_log_first">Log a withdrawal</string>
+    <string name="history_find_atm">Find an ATM on the map</string>
+    <string name="history_load_sample">Load sample data</string>
+    <string name="history_log">Log</string>
+    <string name="history_this_month_withdrawn">Withdrawn this month</string>
+    <string name="history_this_month_fees">Fees this month</string>
+    <string name="history_month_summary">%1$s · %2$s fees</string>
+    <string name="history_fee">−%1$s fee</string>
 </resources>

@@ -4,11 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.itslanmi.withdrawwise.data.LocationProvider
+import io.github.itslanmi.withdrawwise.domain.FeeCalculator
 import io.github.itslanmi.withdrawwise.domain.FeeTier
+import io.github.itslanmi.withdrawwise.domain.WithdrawalLogger
 import io.github.itslanmi.withdrawwise.domain.model.Atm
 import io.github.itslanmi.withdrawwise.domain.model.Bank
 import io.github.itslanmi.withdrawwise.domain.model.GeoPoint
 import io.github.itslanmi.withdrawwise.domain.model.Money
+import io.github.itslanmi.withdrawwise.domain.model.Withdrawal
 import io.github.itslanmi.withdrawwise.domain.model.sumOfMoney
 import io.github.itslanmi.withdrawwise.domain.repository.DirectoryRepository
 import io.github.itslanmi.withdrawwise.domain.repository.PreferencesRepository
@@ -45,18 +48,22 @@ data class AtmSelection(
 data class MapUiState(
     val loading: Boolean = true,
     val atms: List<AtmUi> = emptyList(),
+    val allAtms: List<AtmUi> = emptyList(),
     val filter: AtmFilter = AtmFilter.All,
     val query: String = "",
     val searchResults: List<AtmUi> = emptyList(),
     val selection: AtmSelection? = null,
     val cardBank: Bank? = null,
     val feesThisMonth: Money = Money.Zero,
-    val userLocation: GeoPoint? = null
+    val userLocation: GeoPoint? = null,
+    val calculator: FeeCalculator = FeeCalculator(emptyList())
 ) {
     val isInCity: Boolean get() = userLocation?.let { it.distanceTo(LjubljanaCenter) <= CityRadiusMeters } == true
 }
 
 sealed interface MapEvent {
+    data class Logged(val withdrawal: Withdrawal) : MapEvent
+
     data class FocusOn(val point: GeoPoint, val zoom: Float) : MapEvent
 }
 
@@ -77,6 +84,7 @@ constructor(
     preferences: PreferencesRepository,
     withdrawals: WithdrawalRepository,
     private val locationProvider: LocationProvider,
+    private val logger: WithdrawalLogger,
     private val clock: Clock
 ) : ViewModel() {
     private val filter = MutableStateFlow(AtmFilter.All)
@@ -143,6 +151,7 @@ constructor(
             MapUiState(
                 loading = all.isEmpty(),
                 atms = visible,
+                allAtms = all,
                 filter = local.filter,
                 query = local.query,
                 searchResults = results,
@@ -151,7 +160,8 @@ constructor(
                 }?.let { selection(it, all) },
                 cardBank = dir.banks.firstOrNull { it.id == prefs.bankId },
                 feesThisMonth = fees,
-                userLocation = local.location
+                userLocation = local.location,
+                calculator = FeeCalculator(dir.banks)
             )
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), MapUiState())
 
@@ -169,6 +179,10 @@ constructor(
         allAtms.value.firstOrNull {
             it.id == id
         }?.let { events.trySend(MapEvent.FocusOn(it.atm.location, FocusZoom)) }
+    }
+
+    fun log(atmId: String, amount: Money) {
+        viewModelScope.launch { events.send(MapEvent.Logged(logger.log(atmId, amount))) }
     }
 
     fun clearSelection() {
