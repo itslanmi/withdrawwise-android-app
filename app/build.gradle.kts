@@ -2,6 +2,8 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 // The Google Maps key is read from local.properties (MAPS_API_KEY=...) or from the
@@ -17,7 +19,9 @@ val mapsApiKey: String =
 
 android {
     namespace = "io.github.itslanmi.withdrawwise"
-    compileSdk = 37
+    compileSdk {
+        version = release(37) { minorApiLevel = 2 }
+    }
 
     defaultConfig {
         applicationId = "io.github.itslanmi.withdrawwise"
@@ -44,7 +48,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
-        viewBinding = true
+        compose = true
     }
 }
 
@@ -55,17 +59,21 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(":data"))
-
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.material)
-    implementation(libs.play.services.maps)
-    implementation(libs.play.services.location)
-    implementation(libs.gson)
-    implementation(libs.vico.views)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.animation)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
 }
