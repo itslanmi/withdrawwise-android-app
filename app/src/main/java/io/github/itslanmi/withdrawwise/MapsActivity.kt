@@ -1,4 +1,4 @@
-package com.example.withdrawwise
+package io.github.itslanmi.withdrawwise
 
 import android.Manifest
 import android.app.NotificationChannel
@@ -7,31 +7,32 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
-import com.example.data.ATM
-import com.example.data.Bank
-
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.withdrawwise.databinding.ActivityMapsBinding
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import io.github.itslanmi.withdrawwise.data.ATM
+import io.github.itslanmi.withdrawwise.data.Bank
+import io.github.itslanmi.withdrawwise.databinding.ActivityMapsBinding
 
 private lateinit var fusedLocationClient: FusedLocationProviderClient
 private val LOCATION_PERMISSION_REQUEST_CODE = 1
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity :
+    AppCompatActivity(),
+    OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -50,33 +51,40 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
         mapFragment.getMapAsync(this)
 
-        binding.btnProfile.setOnClickListener() {
+        binding.btnProfile.setOnClickListener {
             val intent = Intent(this, ChartActivity::class.java)
             startActivity(intent)
         }
 
-        binding.btnInfo.setOnClickListener() {
-            if(isATMSelected) {
+        binding.btnInfo.setOnClickListener {
+            if (isATMSelected) {
                 showNotification()
-            }else{
+            } else {
                 Log.d("MapsActivity", "No ATM selected")
                 Toast.makeText(this, "Please select an ATM first", Toast.LENGTH_SHORT).show()
             }
-
         }
 
-        binding.btnAdd.setOnClickListener(){
-            if(isATMSelected){
+        binding.btnAdd.setOnClickListener {
+            if (isATMSelected) {
                 val intent = Intent(this, AddWithdrawalActivity::class.java)
                 intent.putExtra("selectedATM", selectedATM.name)
                 startActivity(intent)
-            }else{
+            } else {
                 Log.d("MapsActivity", "No ATM selected")
                 Toast.makeText(this, "Please select an ATM first", Toast.LENGTH_SHORT).show()
             }
@@ -100,7 +108,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapsIntent = Intent(this, MapsActivity::class.java)
         val profileIntent = Intent(this, ChartActivity::class.java)
         val pendingIntent = PendingIntent.getActivities(
-            this, 0, arrayOf(mapsIntent, profileIntent), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            this,
+            0,
+            arrayOf(mapsIntent, profileIntent),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         // Build the notification
@@ -118,7 +129,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
         mMap.isMyLocationEnabled = true
@@ -137,17 +152,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.addMarker(MarkerOptions().position(atmLocation).title(atm.name))?.tag = atm
         }
 
-
         mMap.setOnMarkerClickListener { marker ->
             val atm = marker.tag as? ATM
             if (atm != null) {
                 selectedATM = atm
                 isATMSelected = true
 
-                Log.d("MapsActivity", "Selected ATM: ${selectedATM.name}, Location: ${selectedATM.latitude}, ${selectedATM.longitude}")
-                //marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.location))
+                Log.d(
+                    "MapsActivity",
+                    "Selected ATM: ${selectedATM.name}, Location: ${selectedATM.latitude}, ${selectedATM.longitude}"
+                )
+                // marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.location))
                 marker.showInfoWindow()
-
             }
             true
         }
@@ -155,6 +171,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.setOnInfoWindowCloseListener {
             isATMSelected = false
         }
-
     }
 }

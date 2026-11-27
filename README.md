@@ -36,6 +36,34 @@ With **WithdrawWise**, you can:
 
 ---
 
+## 🛠️ Getting Started
+
+**Requirements:** Android Studio (latest stable) or JDK 17+, and the Android SDK (platform 37).
+
+1. Clone the repo and open it in Android Studio.
+2. Get a free [Google Maps SDK for Android](https://developers.google.com/maps/documentation/android-sdk/get-api-key) key.
+3. Add it to `local.properties` in the project root (this file is git-ignored):
+   ```properties
+   MAPS_API_KEY=AIza...
+   ```
+   Alternatively export `MAPS_API_KEY` as an environment variable.
+4. Run the `app` configuration, or build from the command line:
+   ```bash
+   ./gradlew assembleDebug
+   ```
+
+Useful tasks:
+
+| Task | What it does |
+|---|---|
+| `./gradlew spotlessApply` | Formats Kotlin sources with ktlint |
+| `./gradlew test` | Runs unit tests |
+| `./gradlew lintDebug` | Runs Android lint |
+
+Every push and pull request is checked by GitHub Actions (formatting, unit tests, lint, debug build).
+
+---
+
 ## 🚀 Built With Love for a Purpose 💻❤️
 
 This project is part of a school assignment to explore the power of maps and notifications in real-world applications. It’s designed to show how technology can make daily financial decisions easier and more cost-effective.
