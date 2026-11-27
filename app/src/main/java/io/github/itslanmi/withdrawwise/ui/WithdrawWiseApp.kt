@@ -2,12 +2,16 @@ package io.github.itslanmi.withdrawwise.ui
 
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -66,8 +70,20 @@ fun WithdrawWiseApp(modifier: Modifier = Modifier, navController: NavHostControl
                     composable<HistoryRoute> {
                         HistoryScreen(onOpenMap = { navController.navigateToTopLevel(TopLevelDestination.Map) })
                     }
-                    composable<InsightsRoute> { InsightsScreen() }
+                    composable<InsightsRoute> {
+                        InsightsScreen(onOpenMap = { navController.navigateToTopLevel(TopLevelDestination.Map) })
+                    }
                     composable<ProfileRoute> { ProfileScreen() }
+                }
+
+                // Keeps scrolled content from showing through the status bar (the map stays edge-to-edge).
+                if (selected != TopLevelDestination.Map) {
+                    Box(
+                        Modifier
+                            .fillMaxWidth()
+                            .windowInsetsTopHeight(WindowInsets.statusBars)
+                            .background(MaterialTheme.colorScheme.background.copy(alpha = 0.94f))
+                    )
                 }
 
                 FloatingNavBar(

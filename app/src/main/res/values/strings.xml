@@ -130,4 +130,39 @@
     <string name="history_this_month_fees">Fees this month</string>
     <string name="history_month_summary">%1$s · %2$s fees</string>
     <string name="history_fee">−%1$s fee</string>
+
+    <!-- Insights -->
+    <string name="period_week">Week</string>
+    <string name="period_month">Month</string>
+    <string name="period_year">Year</string>
+    <string name="period_this_week">the last 7 days</string>
+    <string name="period_this_month">this month</string>
+    <string name="period_this_year">this year</string>
+    <string name="period_previous_week">the week before</string>
+    <string name="period_previous_month">last month</string>
+    <string name="period_previous_year">last year</string>
+    <string name="insights_fees_paid">Fees paid %1$s</string>
+    <string name="insights_less_than">%1$s less than %2$s</string>
+    <string name="insights_more_than">%1$s more than %2$s</string>
+    <string name="insights_same_as">Same as %1$s</string>
+    <string name="insights_no_previous">Nothing logged %1$s</string>
+    <string name="insights_withdrawn">Withdrawn</string>
+    <string name="insights_fees">Fees</string>
+    <string name="insights_withdrawals">Withdrawals</string>
+    <string name="insights_free_share">Free withdrawals</string>
+    <string name="insights_average">Average</string>
+    <string name="insights_trend">Trend</string>
+    <string name="insights_avoidable_title">%1$s could have been saved</string>
+    <plurals name="insights_avoidable_body">
+        <item quantity="one">%1$d withdrawal had a free ATM within %2$d m.</item>
+        <item quantity="other">%1$d withdrawals had a free ATM within %2$d m.</item>
+    </plurals>
+    <string name="insights_all_free_title">Every withdrawal was free</string>
+    <string name="insights_smart_title">No avoidable fees</string>
+    <string name="insights_smart_body">There was no free ATM nearby whenever you paid a fee. Nice planning!</string>
+    <string name="insights_top_atms">Your top ATMs</string>
+    <plurals name="insights_visits">
+        <item quantity="one">%d visit</item>
+        <item quantity="other">%d visits</item>
+    </plurals>
 </resources>
