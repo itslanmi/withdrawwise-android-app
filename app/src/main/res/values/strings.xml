@@ -165,4 +165,22 @@
         <item quantity="one">%d visit</item>
         <item quantity="other">%d visits</item>
     </plurals>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Fee summaries</string>
+    <string name="notification_channel_description">Weekly and monthly summaries of your withdrawals and fees.</string>
+    <string name="notification_weekly_title">Your week in withdrawals</string>
+    <string name="notification_monthly_title">%1$s in review</string>
+    <plurals name="notification_body">
+        <item quantity="one">You withdrew %1$s in %2$d withdrawal and paid %3$s in fees. %4$d %% was free.</item>
+        <item quantity="other">You withdrew %1$s in %2$d withdrawals and paid %3$s in fees. %4$d %% were free.</item>
+    </plurals>
+    <plurals name="notification_body_free">
+        <item quantity="one">You withdrew %1$s in %2$d withdrawal and paid no fees at all. Nice!</item>
+        <item quantity="other">You withdrew %1$s in %2$d withdrawals and paid no fees at all. Nice!</item>
+    </plurals>
+    <string name="profile_preview_notification">Send a preview</string>
+    <string name="profile_preview_notification_body">Shows this month\'s summary right now.</string>
+    <string name="profile_notifications_blocked">Notifications are blocked</string>
+    <string name="profile_notifications_blocked_body">Allow them to receive your summaries.</string>
 </resources>
