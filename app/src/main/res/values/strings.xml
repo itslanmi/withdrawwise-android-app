@@ -1,29 +1,19 @@
 <resources>
     <string name="app_name">WithdrawWise</string>
-    <string name="title_activity_maps">MapsActivity</string>
-    <string name="user_name">User Name</string>
-    <string name="user_bank">Bank Name</string>
-    <string name="chart_label">Withdrawals by months:</string>
-    <string name="statistics_label">Statistics:</string>
-    <string name="total_amount_label">Total Amount:</string>
-    <string name="lost_in_fees_label">Lost in Fees:</string>
-    <string name="local_withdrawals_label">Local Bank:</string>
-    <string name="foreign_withdrawals_label">Foreign Bank:</string>
 
-    <string name="total_amount_data">%1$s$</string>
-    <string name="lost_in_fees_data">%1$s$</string>
-    <string name="local_withdrawals_data">%1$s Withdrawals</string>
-    <string name="foreign_withdrawals_data">%1$s Withdrawals</string>
+    <!-- Navigation -->
+    <string name="nav_map">Map</string>
+    <string name="nav_history">History</string>
+    <string name="nav_insights">Insights</string>
+    <string name="nav_profile">Profile</string>
 
-    <string name="atm_name">ATM Full Name:\n%1$s</string>
-    <string name="atm_bank_local">Bank Name:\n%1$s (Local)</string>
-    <string name="atm_bank_foreign">Bank Name:\n%1$s (Foreign)</string>
-    <string name="atm_fee_local">Withdrawal Fee does not apply</string>
-    <string name="atm_fee_foreign">Withdrawal Fee: %1$s %2$s</string>
-    <string name="enter_amount_label">Enter amount below</string>
-    <string name="log_withdrawal_btn">Log Withdrawal</string>
-
-    <string name="add_btn">Add</string>
-    <string name="info_btn">Info</string>
-    <string name="profile_btn">Profile</string>
+    <!-- Placeholders (replaced feature by feature) -->
+    <string name="placeholder_map_title">ATM map is on its way</string>
+    <string name="placeholder_map_message">Every ATM in Ljubljana, colour-coded by what it costs you.</string>
+    <string name="placeholder_history_title">No withdrawals yet</string>
+    <string name="placeholder_history_message">Withdrawals you log will show up here, grouped by month.</string>
+    <string name="placeholder_insights_title">Insights need some data</string>
+    <string name="placeholder_insights_message">Log a few withdrawals and we will show where your money goes.</string>
+    <string name="placeholder_profile_title">Your profile</string>
+    <string name="placeholder_profile_message">Pick your bank and tune notifications here.</string>
 </resources>

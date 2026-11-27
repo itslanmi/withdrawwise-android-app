@@ -15,6 +15,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(libs.gson)
+    implementation("com.google.code.gson:gson:2.15.0")
     testImplementation(libs.junit)
 }
