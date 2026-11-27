@@ -19,11 +19,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -45,6 +50,7 @@ import com.google.maps.android.compose.rememberUpdatedMarkerState
 import io.github.itslanmi.withdrawwise.BuildConfig
 import io.github.itslanmi.withdrawwise.R
 import io.github.itslanmi.withdrawwise.domain.model.GeoPoint
+import io.github.itslanmi.withdrawwise.feature.log.LogWithdrawalSheet
 import io.github.itslanmi.withdrawwise.ui.components.LocalBottomBarPadding
 import io.github.itslanmi.withdrawwise.ui.components.LocationPermissions
 import io.github.itslanmi.withdrawwise.ui.components.MapControlButton
@@ -56,12 +62,7 @@ import io.github.itslanmi.withdrawwise.ui.model.LjubljanaCenter
 import io.github.itslanmi.withdrawwise.ui.theme.extended
 
 @Composable
-fun MapScreen(
-    onOpenInsights: () -> Unit,
-    modifier: Modifier = Modifier,
-    onLogWithdrawal: ((String) -> Unit)? = null,
-    viewModel: MapViewModel = hiltViewModel()
-) {
+fun MapScreen(onOpenInsights: () -> Unit, modifier: Modifier = Modifier, viewModel: MapViewModel = hiltViewModel()) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val isDark = MaterialTheme.extended.isDark
@@ -70,6 +71,11 @@ fun MapScreen(
         rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
             if (result.values.any { it }) viewModel.refreshLocation(focus = true)
         }
+
+    val snackbar = remember { SnackbarHostState() }
+    var loggingAtmId by rememberSaveable { mutableStateOf<String?>(null) }
+    val loggedTemplate = stringResource(R.string.map_logged)
+    val freeLabel = stringResource(R.string.fee_free)
 
     val cameraState =
         rememberCameraPositionState {
@@ -82,6 +88,16 @@ fun MapScreen(
             when (event) {
                 is MapEvent.FocusOn ->
                     cameraState.animate(CameraUpdateFactory.newLatLngZoom(event.point.toLatLng(), event.zoom), 650)
+
+                is MapEvent.Logged -> {
+                    val fee = event.withdrawal.fee
+                    snackbar.showSnackbar(
+                        loggedTemplate.format(
+                            event.withdrawal.amount.formatShort(),
+                            if (fee.isZero) freeLabel else fee.format()
+                        )
+                    )
+                }
             }
         }
     }
@@ -162,6 +178,11 @@ fun MapScreen(
             }
         }
 
+        SnackbarHost(
+            hostState = snackbar,
+            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = bottomPadding + 132.dp)
+        )
+
         if (!BuildConfig.HAS_MAPS_KEY) {
             MissingMapKeyNotice(Modifier.align(Alignment.Center).padding(horizontal = 32.dp))
         }
@@ -213,8 +234,25 @@ fun MapScreen(
             cardBank = state.cardBank,
             onDismiss = viewModel::clearSelection,
             onShowAtm = viewModel::select,
-            onLogWithdrawal = onLogWithdrawal
+            onLogWithdrawal = {
+                viewModel.clearSelection()
+                loggingAtmId = it
+            }
         )
+    }
+
+    loggingAtmId?.let { id ->
+        state.allAtms.firstOrNull { it.id == id }?.let { atm ->
+            LogWithdrawalSheet(
+                atm = atm,
+                quoteFor = { amount -> state.calculator.quote(state.cardBank?.id, atm.atm, amount) },
+                onDismiss = { loggingAtmId = null },
+                onConfirm = { amount ->
+                    viewModel.log(atm.id, amount)
+                    loggingAtmId = null
+                }
+            )
+        }
     }
 }
 
