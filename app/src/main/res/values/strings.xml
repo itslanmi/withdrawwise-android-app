@@ -14,6 +14,67 @@
     <string name="placeholder_history_message">Withdrawals you log will show up here, grouped by month.</string>
     <string name="placeholder_insights_title">Insights need some data</string>
     <string name="placeholder_insights_message">Log a few withdrawals and we will show where your money goes.</string>
-    <string name="placeholder_profile_title">Your profile</string>
-    <string name="placeholder_profile_message">Pick your bank and tune notifications here.</string>
+
+    <!-- Common -->
+    <string name="action_back">Back</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="fee_free">Free</string>
+    <plurals name="bank_free_atms">
+        <item quantity="one">Free at %d ATM in Ljubljana</item>
+        <item quantity="other">Free at %d ATMs in Ljubljana</item>
+    </plurals>
+
+    <!-- Permissions -->
+    <string name="permission_allow">Allow</string>
+    <string name="permission_granted">Granted</string>
+    <string name="permission_location_title">Location</string>
+    <string name="permission_location_body">Find the closest free ATM around you.</string>
+    <string name="permission_notifications_title">Notifications</string>
+    <string name="permission_notifications_body">Weekly and monthly fee summaries.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Withdraw smarter.\nKeep your fees.</string>
+    <string name="onboarding_welcome_body">See what every ATM in Ljubljana costs with your card, find the nearest free one and track where your money goes.</string>
+    <string name="onboarding_get_started">Get started</string>
+    <string name="onboarding_continue">Continue</string>
+    <string name="onboarding_finish">Start saving</string>
+    <string name="onboarding_bank_title">Which bank is your card from?</string>
+    <string name="onboarding_bank_body">We use it to colour every ATM by what it costs you.</string>
+    <string name="onboarding_finish_title">Almost there</string>
+    <string name="onboarding_finish_body">Tell us what to call you and choose what WithdrawWise may use.</string>
+    <string name="onboarding_name_hint">Your first name (optional)</string>
+    <string name="onboarding_change_later">You can change all of this later in your profile.</string>
+
+    <!-- Profile -->
+    <string name="profile_greeting">Hi, %1$s</string>
+    <string name="profile_greeting_anonymous">Hi there</string>
+    <plurals name="profile_withdrawal_count">
+        <item quantity="one">%d withdrawal logged</item>
+        <item quantity="other">%d withdrawals logged</item>
+    </plurals>
+    <string name="profile_section_card">Your card</string>
+    <string name="profile_pick_bank">Pick your bank</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_name_empty">Not set</string>
+    <string name="profile_section_appearance">Appearance</string>
+    <string name="profile_theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="profile_section_notifications">Notifications</string>
+    <string name="profile_weekly_summary">Weekly summary</string>
+    <string name="profile_weekly_summary_body">Every Monday: what you withdrew and paid in fees.</string>
+    <string name="profile_monthly_summary">Monthly report</string>
+    <string name="profile_monthly_summary_body">On the 1st: last month at a glance.</string>
+    <string name="profile_section_about">About</string>
+    <string name="profile_version">Version %1$s</string>
+    <string name="profile_demo_data">Demo data</string>
+    <string name="profile_demo_data_body">ATM locations and fees are illustrative and do not reflect real bank price lists.</string>
+    <string name="profile_licenses">Open-source licences</string>
+    <string name="profile_licenses_body">Poppins (SIL OFL 1.1) · Material Symbols (Apache 2.0)</string>
+    <string name="profile_reset">Reset app</string>
+    <string name="profile_reset_title">Reset WithdrawWise?</string>
+    <string name="profile_reset_body">This deletes every logged withdrawal and your profile. It cannot be undone.</string>
+    <string name="profile_reset_confirm">Delete everything</string>
 </resources>
