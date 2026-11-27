@@ -1,21 +1,33 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
+// The Google Maps key is read from local.properties (MAPS_API_KEY=...) or from the
+// MAPS_API_KEY environment variable, so it never ends up in version control.
+val mapsApiKey: String =
+    Properties()
+        .apply {
+            val file = rootProject.file("local.properties")
+            if (file.exists()) file.inputStream().use(::load)
+        }.getProperty("MAPS_API_KEY")
+        ?: System.getenv("MAPS_API_KEY")
+        ?: ""
+
 android {
-    namespace = "com.example.withdrawwise"
-    compileSdk = 35
+    namespace = "io.github.itslanmi.withdrawwise"
+    compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.example.withdrawwise"
+        applicationId = "io.github.itslanmi.withdrawwise"
         minSdk = 31
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 
     buildTypes {
@@ -28,30 +40,32 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding = true
     }
 }
 
-dependencies {
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    }
+}
 
-    implementation ("com.google.code.gson:gson:2.11.0")
-    implementation ("com.google.android.gms:play-services-location:21.0.1")
+dependencies {
     implementation(project(":data"))
-    implementation("com.patrykandpatrick.vico:views:2.0.0-beta.3")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
     implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.gson)
+    implementation(libs.vico.views)
+
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }

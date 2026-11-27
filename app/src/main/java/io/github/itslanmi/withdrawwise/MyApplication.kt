@@ -1,11 +1,11 @@
-package com.example.withdrawwise
+package io.github.itslanmi.withdrawwise
 
 import android.app.Application
 import android.util.Log
-import com.example.data.ATM
-import com.example.data.Bank
-import com.example.data.User
 import com.google.gson.Gson
+import io.github.itslanmi.withdrawwise.data.ATM
+import io.github.itslanmi.withdrawwise.data.Bank
+import io.github.itslanmi.withdrawwise.data.User
 import java.util.UUID
 
 class MyApplication : Application() {
@@ -62,9 +62,7 @@ class MyApplication : Application() {
         ATMlist.add(atm)
     }
 
-    fun getUser(): User {
-        return user
-    }
+    fun getUser(): User = user
 
     private fun getUserId(): UUID {
         val sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE)
@@ -81,28 +79,22 @@ class MyApplication : Application() {
         }
     }
 
-    fun getSelectedATM(name: String?): ATM {
-        return ATMlist.find { it.name == name } ?: ATMlist[0]
-    }
+    fun getSelectedATM(name: String?): ATM = ATMlist.find { it.name == name } ?: ATMlist[0]
 
-    fun gsonSerializeATMs(): String {
-        return Gson().toJson(ATMlist)
-    }
+    fun gsonSerializeATMs(): String = Gson().toJson(ATMlist)
 
     fun gsonDeserializeATMs(json: String) {
         this.ATMlist = Gson().fromJson(json, Array<ATM>::class.java).toMutableList()
     }
 
-    fun readUserWithdrawals(): String {
-        return try {
-            val fileInputStream = openFileInput("user_withdrawals.json")
-            val json = fileInputStream.bufferedReader().use { it.readText() }
-            user.gsonDeserializeWithdrawals(json)
-            "User data loaded successfully"
-        } catch (e: Exception) {
-            Log.e("MyApplication", "Error reading user data from file", e)
-            "Error reading user data"
-        }
+    fun readUserWithdrawals(): String = try {
+        val fileInputStream = openFileInput("user_withdrawals.json")
+        val json = fileInputStream.bufferedReader().use { it.readText() }
+        user.gsonDeserializeWithdrawals(json)
+        "User data loaded successfully"
+    } catch (e: Exception) {
+        Log.e("MyApplication", "Error reading user data from file", e)
+        "Error reading user data"
     }
 
     fun saveUserWithdrawals() {
@@ -116,15 +108,13 @@ class MyApplication : Application() {
         }
     }
 
-    fun readATMData(): String {
-        return try {
-            val fileInputStream = openFileInput("atm_data.json")
-            val json = fileInputStream.bufferedReader().use { it.readText() }
-            gsonDeserializeATMs(json)
-            "ATM data loaded successfully"
-        } catch (e: Exception) {
-            Log.e("MyApplication", "Error reading ATM data from file", e)
-            "Error reading ATM data"
-        }
+    fun readATMData(): String = try {
+        val fileInputStream = openFileInput("atm_data.json")
+        val json = fileInputStream.bufferedReader().use { it.readText() }
+        gsonDeserializeATMs(json)
+        "ATM data loaded successfully"
+    } catch (e: Exception) {
+        Log.e("MyApplication", "Error reading ATM data from file", e)
+        "Error reading ATM data"
     }
 }
