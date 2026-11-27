@@ -8,8 +8,6 @@
     <string name="nav_profile">Profile</string>
 
     <!-- Placeholders (replaced feature by feature) -->
-    <string name="placeholder_map_title">ATM map is on its way</string>
-    <string name="placeholder_map_message">Every ATM in Ljubljana, colour-coded by what it costs you.</string>
     <string name="placeholder_history_title">No withdrawals yet</string>
     <string name="placeholder_history_message">Withdrawals you log will show up here, grouped by month.</string>
     <string name="placeholder_insights_title">Insights need some data</string>
@@ -19,6 +17,8 @@
     <string name="action_back">Back</string>
     <string name="action_save">Save</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_close">Close</string>
+    <string name="action_clear">Clear</string>
     <string name="fee_free">Free</string>
     <plurals name="bank_free_atms">
         <item quantity="one">Free at %d ATM in Ljubljana</item>
@@ -77,4 +77,33 @@
     <string name="profile_reset_title">Reset WithdrawWise?</string>
     <string name="profile_reset_body">This deletes every logged withdrawal and your profile. It cannot be undone.</string>
     <string name="profile_reset_confirm">Delete everything</string>
+
+    <!-- Map -->
+    <string name="map_search_hint">Search ATMs, banks, areas</string>
+    <string name="map_search_empty">No ATMs match your search.</string>
+    <string name="map_filter_all">All</string>
+    <string name="map_filter_free">Free for me</string>
+    <string name="map_filter_low">Low fee</string>
+    <string name="map_filter_24h">24/7</string>
+    <string name="map_fees_this_month">Fees this month</string>
+    <string name="map_nearest_free">Nearest free</string>
+    <string name="map_my_location">My location</string>
+    <string name="map_key_missing_title">Map tiles unavailable</string>
+    <string name="map_key_missing_body">This build has no Google Maps key. Add MAPS_API_KEY to local.properties to load the map. Search, filters and ATM details still work.</string>
+
+    <!-- ATM detail -->
+    <string name="atm_fee_label">Fee for a %1$s withdrawal</string>
+    <string name="atm_fee_no_bank">Pick your bank in Profile to see your fee.</string>
+    <string name="atm_fee_own_bank">Your own %1$s ATM, no fee.</string>
+    <string name="atm_fee_partner">Partner network, no fee with your %1$s card.</string>
+    <string name="atm_fee_other_bank">Charged by %1$s for using another bank\'s ATM.</string>
+    <string name="atm_fee_with_surcharge">%1$s fee plus a %2$s operator surcharge.</string>
+    <string name="atm_open_24h">Open 24/7</string>
+    <string name="atm_limited_hours">Limited hours</string>
+    <string name="atm_contactless">Contactless</string>
+    <string name="atm_tip_title">Save %1$s</string>
+    <string name="atm_tip_body">%1$s is free for you, %2$s away.</string>
+    <string name="atm_tip_show">Show</string>
+    <string name="atm_navigate">Navigate</string>
+    <string name="atm_log">Log withdrawal</string>
 </resources>
