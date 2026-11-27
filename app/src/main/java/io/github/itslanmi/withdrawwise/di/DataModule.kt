@@ -13,12 +13,15 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.itslanmi.withdrawwise.data.AssetDirectoryRepository
 import io.github.itslanmi.withdrawwise.data.DataStorePreferencesRepository
+import io.github.itslanmi.withdrawwise.data.FusedLocationProvider
+import io.github.itslanmi.withdrawwise.data.LocationProvider
 import io.github.itslanmi.withdrawwise.data.RoomWithdrawalRepository
 import io.github.itslanmi.withdrawwise.data.db.WithdrawWiseDatabase
 import io.github.itslanmi.withdrawwise.data.db.WithdrawalDao
 import io.github.itslanmi.withdrawwise.domain.repository.DirectoryRepository
 import io.github.itslanmi.withdrawwise.domain.repository.PreferencesRepository
 import io.github.itslanmi.withdrawwise.domain.repository.WithdrawalRepository
+import java.time.Clock
 import javax.inject.Singleton
 
 private val Context.userPreferences by preferencesDataStore(name = "user_preferences")
@@ -37,6 +40,9 @@ object DataProvidersModule {
     @Provides
     @Singleton
     fun dataStore(@ApplicationContext context: Context): DataStore<Preferences> = context.userPreferences
+
+    @Provides
+    fun clock(): Clock = Clock.systemDefaultZone()
 }
 
 @Module
@@ -50,4 +56,7 @@ interface DataBindingsModule {
 
     @Binds
     fun preferences(impl: DataStorePreferencesRepository): PreferencesRepository
+
+    @Binds
+    fun location(impl: FusedLocationProvider): LocationProvider
 }
