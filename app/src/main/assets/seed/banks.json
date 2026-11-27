@@ -1,0 +1,25 @@
+{
+  "_comment": "Demo data for the WithdrawWise MVP. Fees and partnerships are illustrative only and do not reflect any bank's real price list.",
+  "banks": [
+    { "id": "nlb", "name": "NLB", "shortName": "NLB", "color": "#2563EB", "issuesCards": true,
+      "otherAtmFee": { "flat": 1.00 } },
+    { "id": "otp", "name": "OTP banka", "shortName": "OTP", "color": "#22A447", "issuesCards": true,
+      "otherAtmFee": { "flat": 1.20 } },
+    { "id": "intesa", "name": "Intesa Sanpaolo Bank", "shortName": "ISP", "color": "#0E9F8F", "issuesCards": true,
+      "otherAtmFee": { "flat": 0.75, "percent": 0.3, "min": 1.00 } },
+    { "id": "unicredit", "name": "UniCredit Banka Slovenija", "shortName": "UC", "color": "#D92D20", "issuesCards": true,
+      "otherAtmFee": { "flat": 1.50 } },
+    { "id": "sparkasse", "name": "Sparkasse", "shortName": "SP", "color": "#DB2777", "issuesCards": true,
+      "otherAtmFee": { "flat": 0.95 }, "freePartners": ["addiko"] },
+    { "id": "addiko", "name": "Addiko Bank", "shortName": "AD", "color": "#7C3AED", "issuesCards": true,
+      "otherAtmFee": { "flat": 1.80 }, "freePartners": ["sparkasse"] },
+    { "id": "delavska", "name": "Delavska hranilnica", "shortName": "DH", "color": "#CA8A04", "issuesCards": true,
+      "otherAtmFee": { "flat": 0.50 } },
+    { "id": "gorenjska", "name": "Gorenjska banka", "shortName": "GB", "color": "#0891B2", "issuesCards": true,
+      "otherAtmFee": { "flat": 1.10 }, "freePartners": ["bks"] },
+    { "id": "bks", "name": "BKS Bank", "shortName": "BKS", "color": "#475569", "issuesCards": true,
+      "otherAtmFee": { "flat": 1.30 }, "freePartners": ["gorenjska"] },
+    { "id": "euronet", "name": "Euronet", "shortName": "EN", "color": "#1E293B", "issuesCards": false,
+      "atmSurcharge": { "flat": 2.95 } }
+  ]
+}
