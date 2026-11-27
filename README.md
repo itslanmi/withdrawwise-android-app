@@ -1,42 +1,104 @@
-# 💸 WithdrawWise: Save While You Withdraw 💳
+<div align="center">
 
-WithdrawWise is your go-to app for smarter ATM withdrawals, designed to help you save money and understand your withdrawal habits. With an intuitive map, real-time notifications, and personalized insights, WithdrawWise empowers you to make informed decisions and reduce unnecessary fees. 🌍📲
+# 💸 WithdrawWise
 
----
+**Withdraw smarter. Keep your fees.**
 
-## ✨ Features That Make a Difference ✨
+See what every ATM in Ljubljana costs with *your* card, jump to the nearest free one,<br/>
+log your withdrawals in two taps and find out how much you could have saved.
 
-### 🗺️ **Interactive ATM Map**
-- View all ATMs in your area with withdrawal fees tailored to the bank you select in your profile. 🏦
-- Quickly find the most cost-effective ATM near you and avoid paying high fees! 🚶‍♂️💡
+![Kotlin](https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&logoColor=white)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=jetpackcompose&logoColor=white)
+![Min SDK](https://img.shields.io/badge/minSdk-31-3DDC84?logo=android&logoColor=white)
+[![CI](https://github.com/itslanmi/withdrawwise-android-app/actions/workflows/ci.yml/badge.svg)](https://github.com/itslanmi/withdrawwise-android-app/actions/workflows/ci.yml)
 
-### 🔔 **Push Notifications**
-- Stay notified with daily, weekly and monthly reminders on your average fee for that period 🚨
-- Never miss an opportunity to save money while on the move. 💰📍
+</div>
 
-### 📊 **Monthly Insights**
-- Track your withdrawal activity with detailed monthly reports. 🗓️
-- See how much you withdraw and analyze how much you’re losing to fees. 📈
-- Discover how much you could save by choosing smarter options! 💵✅
-
-### 💡 **Cost Optimization**
-- Get personalized suggestions on reducing fees by choosing the best ATMs. 🤔✨
-- WithdrawWise ensures you make the most of your money, every time. 🎯💳
-
----
-
-## 🌟 Why Choose WithdrawWise? 🌟
-
-WithdrawWise isn't just another ATM finder—it’s a financial companion. Whether you're traveling or managing everyday expenses, the app helps you take control of your cash withdrawals and avoid unnecessary fees. 🚀💸
-
-With **WithdrawWise**, you can:
-- Save money effortlessly. 💹
-- Gain insights into your spending habits. 🧾
-- Make smarter financial decisions. 🧠💵
+<p align="center">
+  <img src="docs/screenshots/01-welcome.png" width="200" alt="Welcome screen" />
+  <img src="docs/screenshots/02-atm-detail.png" width="200" alt="ATM detail with fee and savings tip" />
+  <img src="docs/screenshots/04-history.png" width="200" alt="Withdrawal history" />
+  <img src="docs/screenshots/05-insights.png" width="200" alt="Insights" />
+</p>
+<p align="center">
+  <img src="docs/screenshots/01b-pick-bank.png" width="200" alt="Pick your bank" />
+  <img src="docs/screenshots/03-log-withdrawal.png" width="200" alt="Log a withdrawal" />
+  <img src="docs/screenshots/07-insights-dark.png" width="200" alt="Insights in dark mode" />
+  <img src="docs/screenshots/08-profile-dark.png" width="200" alt="Profile in dark mode" />
+</p>
 
 ---
 
-## 🛠️ Getting Started
+## ✨ Features
+
+### 🗺️ Map-first, colour-coded ATMs
+- Full-screen Google Map of Ljubljana with **pins coloured by what each ATM costs you**: 🟢 free, 🟠 low fee, 🔴 expensive.
+- Accent-insensitive search ("presern" finds *Prešernov trg*) and filters: *Free for me*, *Low fee*, *24/7*.
+- **Nearest free** jumps straight to the closest ATM that is free with your card.
+- Tap a pin for the exact fee for a 50 € withdrawal and *why* (own bank, partner network, your bank's fee, operator surcharge), plus walking directions.
+- 💡 *"Save 3,95 € — NLB Nama is free for you, 330 m away."*
+
+### 🧾 Log and history
+- Log a withdrawal from the map or from History in two taps: quick amounts (20/50/100/200 €) with a **live fee preview**.
+- History grouped by month with totals, swipe-to-delete with undo, and tap to edit.
+
+### 📊 Insights
+- Week / month / year views: fees paid compared with the previous period, total withdrawn, share of free withdrawals, average withdrawal.
+- Animated trend chart for amounts withdrawn or fees paid.
+- **Avoidable fees:** how much you paid at ATMs that had a free one within 500 m.
+- Your most-used ATMs.
+
+### 🔔 Summaries
+- Weekly (Mondays) and monthly (1st) notifications with your totals. Tapping one opens Insights.
+
+### 🎨 Polish
+- Custom Material 3 design system inspired by Ljubljana's city apps: Poppins, soft cards, black pill buttons, floating nav bar.
+- **Light and dark** themes designed together, with an in-app theme switch.
+- 🇬🇧 English and 🇸🇮 Slovenian, with per-app language selection.
+- Adaptive and themed launcher icon, splash screen, predictive back.
+
+> **Demo data:** banks, ATM locations and fees are *illustrative* and bundled as JSON in
+> [`app/src/main/assets/seed`](app/src/main/assets/seed). They do not reflect any bank's real price list.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    subgraph app [":app — Android"]
+        UI["Compose screens<br/>(Map · History · Insights · Profile)"] --> VM["ViewModels<br/>(StateFlow)"]
+        VM --> Repo["Repositories<br/>Room · DataStore · JSON assets"]
+        Worker["WorkManager<br/>SummaryWorker"] --> Repo
+    end
+    subgraph domain [":domain — pure Kotlin"]
+        Fee["FeeCalculator"]
+        Ins["InsightsCalculator"]
+        Log["WithdrawalLogger"]
+        Plan["SummaryPlanner"]
+    end
+    VM --> domain
+    Worker --> domain
+    Repo -.implements.-> domain
+```
+
+- **`:domain`** is plain Kotlin/JVM with no Android dependencies: money as cents, fee rules, the fee engine, insights maths and use cases. It is fully unit tested.
+- **`:app`** contains a single Activity, Navigation Compose with type-safe routes, Hilt for dependency injection, Room for withdrawals, DataStore for the profile, and WorkManager for summaries.
+
+| Area | Tech |
+|---|---|
+| UI | Jetpack Compose, Material 3, custom theme, Poppins, Material Symbols Rounded |
+| Maps and location | Google Maps Compose, custom JSON map styles, Fused Location Provider |
+| State | ViewModel, Kotlin Coroutines and `StateFlow` |
+| DI | Hilt (KSP) |
+| Storage | Room, DataStore Preferences, kotlinx.serialization (seed data) |
+| Background | WorkManager with Hilt workers |
+| Quality | JUnit, Spotless + ktlint (with Compose rules), Android Lint, GitHub Actions |
+| Build | Gradle 9, AGP 9 (built-in Kotlin), Kotlin 2.4, R8 |
+
+---
+
+## 🛠️ Getting started
 
 **Requirements:** Android Studio (latest stable) or JDK 17+, and the Android SDK (platform 37).
 
@@ -46,31 +108,39 @@ With **WithdrawWise**, you can:
    ```properties
    MAPS_API_KEY=AIza...
    ```
-   Alternatively export `MAPS_API_KEY` as an environment variable.
+   Or export `MAPS_API_KEY` as an environment variable. Without a key the app still runs: search, filters, ATM details, history and insights all work, and the map shows a notice instead of tiles.
 4. Run the `app` configuration, or build from the command line:
    ```bash
    ./gradlew assembleDebug
    ```
-
-Useful tasks:
+5. To try every screen immediately, open **History → Load sample data**.
 
 | Task | What it does |
 |---|---|
-| `./gradlew spotlessApply` | Formats Kotlin sources with ktlint |
-| `./gradlew test` | Runs unit tests |
-| `./gradlew lintDebug` | Runs Android lint |
+| `./gradlew test` | Unit tests (`:domain` and `:app`) |
+| `./gradlew spotlessApply` | Formats Kotlin with ktlint |
+| `./gradlew lintDebug` | Android lint |
+| `./gradlew assembleRelease` | Minified release APK (debug-signed unless a keystore is configured) |
 
-Every push and pull request is checked by GitHub Actions (formatting, unit tests, lint, debug build).
-
----
-
-## 🚀 Built With Love for a Purpose 💻❤️
-
-This project is part of a school assignment to explore the power of maps and notifications in real-world applications. It’s designed to show how technology can make daily financial decisions easier and more cost-effective.
-Built by Milan Momcilovic, a student from Faculty of Electrical Engineering and Computer Science, University of Maribor.
+### CI and releases
+- Every push and pull request runs formatting, unit tests, lint and a debug build ([`ci.yml`](.github/workflows/ci.yml)).
+- Pushing a tag like `v1.0.0` builds a minified APK and attaches it to a GitHub Release ([`release.yml`](.github/workflows/release.yml)). Optional signing secrets are documented in the workflow.
 
 ---
 
-💡 **Pro Tip:** Update your profile with your bank details for tailored fee information and optimized suggestions!
+## 🗺️ Roadmap
+- Live ATM data from OpenStreetMap and more Slovenian cities
+- Real fee tables per bank
+- Home-screen widget showing this month's fees
+- CSV export
+- Compose UI and screenshot tests
 
-Let WithdrawWise guide you to smarter withdrawals and bigger savings! 🌟
+---
+
+## 🙌 Credits
+
+Built by **Milan Momcilovic**. It started as a project at the Faculty of Electrical Engineering and Computer Science, University of Maribor, and was rebuilt as a modern Compose app.
+
+- Font: [Poppins](https://fonts.google.com/specimen/Poppins) (SIL Open Font License 1.1)
+- Icons: [Material Symbols Rounded](https://fonts.google.com/icons) (Apache License 2.0)
+- Design inspiration: the map-first layout of Ljubljana's Urbana app
